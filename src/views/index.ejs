@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+        crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Incidencias</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+
+        <div class="container">
+            <div class="row mt-2">
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="text-center card-title">
+                                Agregar Incidencia
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="/add" method="POST">
+                                <div class="form-group">
+                                    <label for="incidencia">Tipo</label>
+                                    <select name="tipo" id="tipo" class="form-control">
+                                        <option selected disabled>Seleccionar...</option>
+                                        <option  value="Peticion ERP" >Petición ERP</option>
+                                        <option value="Fallo" >Fallo</option>
+                                        <option value="Soporte" >Soporte</option>
+                                        <option value="Funcionalidad" >Funcionalidad</option>                                
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="incidencia">Prioridad</label>
+                                    <select name="prioridad" id="prioridad" class="form-control">
+                                        <option selected disabled>Seleccionar...</option>
+                                        <option  value="Alta" >Alta</option>
+                                        <option value="Media" >Media</option>
+                                        <option value="Baja" >Baja</option>                              
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="incidencia">Grupo:</label>
+                                    <input type="text" name="grupo" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="incidencia">Asunto:</label>
+                                    <input type="text" name="asunto" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="incidencia">Descripcion:</label>
+                                    <textarea name="descripcion" cols="80" class="form-control" ></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Suministro">Fecha:</label>
+                                    <input type="date" name="fecha"  class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Agregar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            
+                            <div class="card" id="Card">
+                                <div class="card-body">
+                                    <h3 class="text-center">Incidencias</h3>
+                                    <hr>
+                                    <div class="col-md-7">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                 
+                                                <tr>
+                                                    <th>N°</th>
+                                                    <th>Tipo</th>
+                                                    <th>Prioridad</th>
+                                                    <th>Grupo</th>
+                                                    <th>Asunto</th>
+                                                    <th>Descripcion</th>
+                                                    <th>Fecha</th>
+                                                    <th>Acción</th>
+                                                </tr>
+                                               
+                                            </thead>
+                                            <body>
+                                                <% for(var i=0; i < incidencia.length; i++){ %>
+                                                    <tr>
+                                                        
+                                                        <td><%= i+1 %></td>
+                                                        <td><%= incidencia[i].tipo %></td>
+                                                        <td><%= incidencia[i].prioridad %></td>
+                                                        <td><%= incidencia[i].grupo %></td>
+                                                        <td><%= incidencia[i].asunto %></td>
+                                                        <td><%= incidencia[i].descripcion %></td>
+                                                        <td><%= incidencia[i].fecha %></td>
+                                                        <td>
+                                                            <a href="/eliminar/<%= incidencia[i]._id %>" class="btn btn-danger">Eliminar</a>
+                                                            <a href="/editar/<%= incidencia[i]._id %>" class="btn btn-info">Editar</a>
+                                                        </td>
+                                                    </tr>
+                                                    <%}%> 
+                                            </body>
+                                        </table>        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
